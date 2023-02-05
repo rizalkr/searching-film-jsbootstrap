@@ -1,34 +1,4 @@
-// // Search Movies
-// $(".search-button").on("click", function () {
-//   $.ajax({
-//     url:
-//       "http://www.omdbapi.com/?apikey=69247038&s=" + $(".input-keyword").val(),
-//     success: (results) => {
-//       const movies = results.Search;
-//       let cards = "";
-//       movies.forEach((m) => {
-//         cards += showCards(m);
-//       });
-//       $(".container-movies").html(cards);
-//       // Click Tombol Detail
-//       $(".modal-detail-button").on("click", function () {
-//         $.ajax({
-//           url:
-//             "http://www.omdbapi.com/?apikey=69247038&i=" +
-//             $(this).data("imdbid"),
-//           success: (m) => {
-//             const movieDetail = showMovieDetails(m);
-//             $(".modal-body").html(movieDetail);
-//           },
-//           error: (e) => console.log(e.responseText),
-//         });
-//       });
-//     },
-//     error: (e) => console.log(e.responseText),
-//   });
-// });
-
-//  Use Fetch
+// Search Button
 const searchButton = document.querySelector(".search-button");
 searchButton.addEventListener("click", function () {
   const inputVal = document.querySelector(".input-keyword");
