@@ -9,21 +9,27 @@ searchButton.addEventListener("click", async function () {
 
 function getMovies(keyword) {
   return fetch("http://www.omdbapi.com/?apikey=69247038&s=" + keyword)
-    .then((response) => response.json())
-    .then((response) => response.Search)
-    .catch((reject) => alert("Error: " + reject));
+    .then((response) => {
+      // Bacanya tidak sama dengan OK ataupun if(response.ok === false)
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((response) => {
+      if (response.Response === "False") {
+        throw new Error(response.Error);
+      }
+      return response.Search;
+    })
+    .catch((reject) => alert(reject));
 }
 
-async function updateUI(movies) {
-  try {
-    let card = "";
-    movies.forEach((m) => (card += showCards(m)));
-    const movieContainer = document.querySelector(".container-movies");
-    movieContainer.innerHTML = card;
-  } catch {
-    const errorHandling = document.querySelector(".error-handling");
-    errorHandling.innerHTML = "Movie not found, please search another movies"
-  }
+function updateUI(movies) {
+  let card = "";
+  movies.forEach((m) => (card += showCards(m)));
+  const movieContainer = document.querySelector(".container-movies");
+  movieContainer.innerHTML = card;
 }
 
 function detailButton() {
